@@ -26,31 +26,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <div className="flex w-full h-screen">
-          {/* Left panel - 1/3 of width, full height */}
-          <div className="w-1/3 h-full bg-secondary p-6">
-            <div className="w-full h-2/6 border-6 my-5 border-gray-200">
-              <div className="p-10 m-10 bg-gray-100 ">
-                <h1 className="text-3xl text-slate-600  hover:text-4xl hover:text-slate-800 font-bold mb-6">
-                  Login Form
-                </h1>
-                <h1 className="text-xl">Login vie email and password</h1>
-              </div>
-            </div>
-
-            <Link href="/">
-              <Button className="w-full text-2xl h-25">Home Page</Button>
-            </Link>
+    <div className="flex w-full h-screen">
+      {/* Left panel - 1/3 of width, full height */}
+      <div className="w-1/3 h-full bg-secondary p-6">
+        <div className="w-full h-2/6 border-6 my-5 border-gray-200">
+          <div className="p-10 m-10 bg-gray-100 ">
+            <h1 className="text-3xl text-slate-600  hover:text-4xl hover:text-slate-800 font-bold mb-6">
+              Login Form
+            </h1>
+            <h1 className="text-xl">Login vie email and password</h1>
           </div>
-
-          {/* Right panel - 2/3 of width, full height */}
-          <div className="w-2/3 h-full p-6">{children}</div>
         </div>
-      </body>
-    </html>
+
+        <Link href="/">
+          <Button className="w-full text-2xl h-25">Home Page</Button>
+        </Link>
+      </div>
+
+      {/* Right panel - 2/3 of width, full height */}
+      <div className="w-2/3 h-full p-6">{children}</div>
+    </div>
   );
 }

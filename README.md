@@ -23,3 +23,4 @@ npx shadcn@latest init
 npm i zod --legacy
 ```
 
+# Test project

@@ -14,7 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Check, AlertCircle } from "lucide-react";
+import { Check, AlertCircle, Eye, EyeOff, Lock } from "lucide-react";
 
 function LoginComponent() {
   // Define the validation schema with Zod
@@ -33,6 +33,7 @@ function LoginComponent() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const validateField = (field: keyof FormData, value: string) => {
     try {
@@ -63,6 +64,10 @@ function LoginComponent() {
     }));
 
     validateField(name as keyof FormData, value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -150,7 +155,6 @@ function LoginComponent() {
                       </AlertDescription>
                     </Alert>
                   )}
-
                 {/* Success Alert */}
                 {isSuccess && (
                   <Alert className="h-12 bg-green-50 text-green-800 border-green-200">
@@ -158,36 +162,54 @@ function LoginComponent() {
                     <AlertDescription>Login successful!</AlertDescription>
                   </Alert>
                 )}
-
                 {/* Email Field */}
-                <div className="space-y-2">
+                <div className="space-y-2 text-3xl">
                   <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="you@example.com"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className={errors.email ? "border-red-500" : ""}
-                  />
+                  <div className="relative">
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={`pl-9 ${errors.email ? "border-red-500" : ""}`}
+                    />
+                  </div>
                   {errors.email && (
                     <p className="text-sm text-red-500">{errors.email}</p>
                   )}
                 </div>
-
-                {/* Password Field */}
-                <div className="space-y-2">
+                {/* Password Field with Toggle */}
+                <div className="space-y-2 text-3xl">
                   <Label htmlFor="password">Password</Label>
-                  <Input
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="••••••••"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className={errors.password ? "border-red-500" : ""}
-                  />
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="••••••••"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      className={`pl-9 ${
+                        errors.password ? "border-red-500" : ""
+                      }`}
+                    />
+                    <button
+                      type="button"
+                      className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
+                      onClick={togglePasswordVisibility}
+                      tabIndex={-1}
+                    >
+                      <div className="flex justify-center items-center mt-2">
+                        {showPassword ? (
+                          <EyeOff size={24} />
+                        ) : (
+                          <Eye size={24} />
+                        )}
+                      </div>
+                    </button>
+                  </div>
                   {errors.password && (
                     <p className="text-sm text-red-500">{errors.password}</p>
                   )}
@@ -197,7 +219,7 @@ function LoginComponent() {
               <CardFooter>
                 <Button
                   type="submit"
-                  className="w-full h-20 mt-8 text-xl bg-slate-950 hover:bg-indigo-800 hover:text-2xl"
+                  className="w-full h-20 mt-8 text-xl bg-slate-950 hover:bg-indigo-800 hover:text-4xl"
                   disabled={isSubmitting || Object.keys(errors).length > 0}
                 >
                   {isSubmitting ? "Logging in..." : "Login"}

@@ -19,11 +19,7 @@ function HomePage() {
                 Login
               </Button>
             </div>
-            <div className="flex-col">
-              <Button variant="secondary" className="ml-5 my-5 w-1/2">
-                Register
-              </Button>
-            </div>
+
             <div className="flex m-5">
               <div className="flex-col">
                 <h1 className="text-3xl font-bold mb-6">Main Content</h1>

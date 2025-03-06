@@ -21,9 +21,9 @@ export default function Home() {
           Login Button
           - This button is a link to the login page.
         */}
-        <div className="flex gap-4 items-center flex-col sm:flex-row hover:text-9xl text-accent-500 dark:text-accent-400">
+        <div className="flex gap-4 items-center flex-col sm:flex-row hover:h-24 hover:text-9xl text-accent-500 dark:text-accent-400">
           <Link
-            className="rounded-full border w-full border-solid bg-slate-900 hover:h-18 hover:w-[460px]  text-white border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:border hover:shadow-4xl  hover:bg-slate-800 hover:text-indigo-500 dark:hover:bg-slate-900 hover:border-transparent text-2xl h-16 sm:h-16 px-4 sm:px-5 sm:min-w-90"
+            className="rounded-full border w-full border-solid bg-slate-900 text-white border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-slate-100 hover:text-slate-800 dark:hover:bg-slate-900 hover:border-transparent text-2xl h-16 sm:h-16 px-4 sm:px-5 sm:min-w-90"
             rel="noopener noreferrer"
             href="/login"
           >
