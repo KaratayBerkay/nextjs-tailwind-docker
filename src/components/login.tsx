@@ -75,10 +75,20 @@ function LoginComponent() {
 
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      const loginEmail = formData.email === "sample@gmail.com";
+      const loginPassword = formData.password === "password";
 
-      // Success state
-      setIsSuccess(true);
-      setErrors({});
+      if (!loginEmail) {
+        setErrors({ email: "Email not found" });
+        return;
+      } else if (!loginPassword) {
+        setErrors({ password: "Incorrect password" });
+        return;
+      } else {
+        // Success state
+        setIsSuccess(true);
+        setErrors({});
+      }
 
       // In a real app, you would handle login logic here
       console.log("Form submitted successfully", validatedData);
@@ -104,13 +114,26 @@ function LoginComponent() {
     <>
       <div className="container mx-auto">
         <div className="flex items-center justify-center my-8">
-          <Card className="w-full max-w-md">
+          <Card className="w-full max-w-3/4">
             <CardHeader>
               <CardTitle className="text-3xl text-slate-600 text-center my-6 hover:text-4xl hover:text-slate-800 font-bold mb-6">
                 Login
               </CardTitle>
               <CardDescription className="text-sm text-center text-gray-500 text-nowrap">
-                Enter any email and password to access your account...
+                <div className="flex flex-col p-3">
+                  <h3 className="text-xl my-3">
+                    Login via email and password. Use the following credentials
+                    to test:
+                  </h3>
+                  <pre className="flex bg-slate-300 text-black p-3 my-4 h-20 items-center justify-center rounded-md">
+                    <code>
+                      {JSON.stringify({
+                        email: "sample@gmail.com",
+                        password: "password",
+                      })}
+                    </code>
+                  </pre>
+                </div>
               </CardDescription>
             </CardHeader>
 
@@ -130,8 +153,8 @@ function LoginComponent() {
 
                 {/* Success Alert */}
                 {isSuccess && (
-                  <Alert className="bg-green-50 text-green-800 border-green-200">
-                    <Check className="h-4 w-4 text-green-600" />
+                  <Alert className="h-12 bg-green-50 text-green-800 border-green-200">
+                    <Check className="w-4 text-green-600 text-2xl" />
                     <AlertDescription>Login successful!</AlertDescription>
                   </Alert>
                 )}
